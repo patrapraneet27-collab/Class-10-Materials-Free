@@ -1,0 +1,193 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+
+    <style>
+        body {
+            background:#0b0124;
+            font-family: Arial, sans-serif;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .form-container {
+            background: white;
+            width: 1000px;
+            margin: auto;
+            padding: 25px 35px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(130, 60, 255, 0.3);
+            text-align: left;
+        }
+
+        h1 {
+            text-align: center;
+            color: #8e2de2;
+            text-shadow: 0 0 10px rgba(140, 50, 255, 0.4);
+        }
+
+        label {
+            
+            font-size: 16px;
+            color: #4a00e0;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"] {
+            width: 95%;
+            padding: 8px;
+            margin: 6px 0 14px 0;
+            border-radius: 8px;
+            border: 2px solid #b88dff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #8e2de2;
+            box-shadow: 0 0 10px rgba(140, 50, 255, 0.5);
+        }
+
+        .radio-group, .subjects-group {
+            margin-bottom: 15px;
+        }
+
+        .glow-btn {
+            width: 200px;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #8e2de2, #4a00e0);
+            color: white;
+            cursor: pointer;
+            transition: 1s ease;
+        }
+
+        .glow-btn:hover {
+            transform: scale(1.03);
+            box-shadow:
+                0 0 18px rgba(165, 90, 255, 0.9),
+                0 0 28px rgba(130, 60, 255, 0.7);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #d54eff, #9b00c9);
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>WELCOME TO OUR FORM</h1>
+
+<div class="form-container">
+<form id="regForm">
+
+
+<label>Name:</label><br>
+<input id="name" type="text" placeholder="Enter your name here" required>
+
+
+<label>Age:</label><br>
+<input id="age" type="number" min="4" max="20" style="width: 100px;" required>
+
+
+<div class="radio-group"required>
+    <label>Gender:</label><br>
+    <input type="radio" name="gender" value="Male" > Male
+    <input type="radio" name="gender" value="Female"> Female
+    <input type="radio" name="gender" value="Other"> Other
+</div>
+
+
+<label>Father's Name:</label><br>
+<input id="fname" type="text" placeholder="Father's Name" required>
+
+
+<label>Mother's Name:</label><br>
+<input id="mname" type="text" placeholder="Mother's Name" >
+
+
+<label>Email:</label><br>
+<input id="email" type="email" placeholder="abc@gmail.com" >
+
+
+<label>Phone No:</label><br>
+<input id="phone" type="tel" placeholder="91-99999-99999" >
+
+
+<div class="radio-group">
+    <label>Caste:</label><br>
+    <input type="radio" name="cs" value="GEN" required> GEN
+    <input type="radio" name="cs" value="OBC"> OBC
+    <input type="radio" name="cs" value="SC"> SC
+    <input type="radio" name="cs" value="ST"> ST
+</div>
+
+
+<label>Birthday:</label><br>
+<input id="birth" type="date" required><br>
+
+
+
+
+
+<a href="Untitled1.html">
+    <button type="button" class="glow-btn">For Class 1 – 10</button>
+</a><br>
+
+<a href="11-12.html">
+    <button type="button" class="glow-btn">For Class 11 – 12 only</button>
+</a>
+
+
+<button type="submit" class="glow-btn submit-btn">Submit</button>
+
+</form>
+</div>
+
+<script>
+document.getElementById("regForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    const data = {
+        name: document.getElementById("name").value,
+        age: document.getElementById("age").value,
+        gender: document.querySelector("input[name='gender']:checked")?.value,
+        father: document.getElementById("fname").value,
+        mother: document.getElementById("mname").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        caste: document.querySelector("input[name='cs']:checked")?.value,
+        birth: document.getElementById("birth").value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbz25deDt1cEJSnEdk_q2kLmfjrx-DSzA9CzmyjHHiLIJ9PGfdrsK1fssbraSAMD5gPt/exec", {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        alert("✔ Form submitted successfully!");
+        window.location.href = "Untitled1.html";
+        
+    })
+    .catch(err => {
+        alert("✘ Error submitting form!");
+        console.error(err);
+    });
+});
+</script>
+
+</body>
+</html>
